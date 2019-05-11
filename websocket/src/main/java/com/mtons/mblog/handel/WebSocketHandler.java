@@ -54,8 +54,9 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     // 当连接要关闭时
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        broadcastWsMsg( ctx, new WsMessage(-11000, ctx.channel().id().toString() ) );
+        broadcastWsMsg( ctx, new WsMessage(-11000, NettyConfig.ctxs.get(ctx) ) );
         NettyConfig.group.remove(ctx.channel());
+        NettyConfig.ctxs.remove(ctx);
         ctx.close();
     }
 
@@ -98,7 +99,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
                          name = AttributeKey.newInstance(wsMessage.getN());
                         ctx.channel().attr(name);
                     }
-
+                    NettyConfig.ctxs.put(ctx,wsMessage.getN());
 
                     ctx.channel().writeAndFlush( new TextWebSocketFrame(
                             gson.toJson(new WsMessage(-1, wsMessage.getN()))));
