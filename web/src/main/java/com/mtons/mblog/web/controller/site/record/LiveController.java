@@ -10,6 +10,8 @@
 package com.mtons.mblog.web.controller.site.record;
 
 import com.mtons.mblog.base.lang.MtonsException;
+import com.mtons.mblog.dao.UserDao;
+import com.mtons.mblog.mapper.UserMapper;
 import com.mtons.mblog.modules.data.AccountProfile;
 import com.mtons.mblog.modules.service.MessageService;
 import com.mtons.mblog.modules.service.UserService;
@@ -37,7 +39,8 @@ public class LiveController extends BaseController {
     private UserService userService;
     @Autowired
     private MessageService messageService;
-
+    @Autowired
+    private UserDao userDao;
     /**
      * 用户文章
      * @param userId 用户ID
@@ -47,6 +50,7 @@ public class LiveController extends BaseController {
     @GetMapping(value = "/{userId}")
     public String posts(@PathVariable(value = "userId") Long userId,
                         ModelMap model, HttpServletRequest request) {
+        userDao.selectAll();
         return method(userId, Views.METHOD_POSTS, model, request);
     }
 

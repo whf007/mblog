@@ -21,14 +21,24 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
             hibernate.search.default.indexBase: ${site.location}/storage/indexes
+    datasource1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+        username: root
+        password: root
+    datasource2:
+            #schema: classpath*:scripts/schema.sql
+            #continue-on-error: false
+            #sql-script-encoding: utf-8
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+            username: root
+            password: root
 
-spring:
-    datasource:
-        driverClassName : com.mysql.jdbc.Driver
-        url : jdbc:mysql://192.168.1.1/test?useUnicode=true&characterEncoding=utf-8
-        username : test
-        password : 123456
 
 mybatis:
-    mapper-locations : classpath:mybatis/*.xml
-    type-aliases-package : com.yibao.beta.dao.entity
+    mapper-locations : classpath:mybatis/mapper/*.xml
+    type-aliases-package : com.mtons.mblog.pojo
+
+
+

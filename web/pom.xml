@@ -20,7 +20,12 @@
             <groupId>com.mtons.websocket</groupId>
             <version>latest</version>
         </dependency>
-
+        <!-- dao -->
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>dao</artifactId>
+            <version>latest</version>
+        </dependency>
         <!-- springboot热部署工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,6 +69,11 @@
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>${commons.httpclient}</version>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
