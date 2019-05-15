@@ -21,3 +21,14 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
             hibernate.search.default.indexBase: ${site.location}/storage/indexes
+
+spring:
+    datasource:
+        driverClassName : com.mysql.jdbc.Driver
+        url : jdbc:mysql://192.168.1.1/test?useUnicode=true&characterEncoding=utf-8
+        username : test
+        password : 123456
+
+mybatis:
+    mapper-locations : classpath:mybatis/*.xml
+    type-aliases-package : com.yibao.beta.dao.entity
