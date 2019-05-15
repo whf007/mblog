@@ -23,17 +23,17 @@ spring:
             hibernate.search.default.indexBase: ${site.location}/storage/indexes
     datasource1:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+        url: jdbc:mysql://129.211.3.40:3306/db_chat?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
         username: root
-        password: root
+        password: wanghf!@#$
     datasource2:
             #schema: classpath*:scripts/schema.sql
             #continue-on-error: false
             #sql-script-encoding: utf-8
             driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+            url: jdbc:mysql://129.211.3.40:3306/db_chat?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
             username: root
-            password: root
+            password: wanghf!@#$
 
 
 mybatis:
