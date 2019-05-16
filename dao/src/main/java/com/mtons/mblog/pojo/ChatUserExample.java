@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ChatUserRecordExample {
+public class ChatUserExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ChatUserRecordExample() {
+    public ChatUserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -235,76 +235,6 @@ public class ChatUserRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andInfoIsNull() {
-            addCriterion("info is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoIsNotNull() {
-            addCriterion("info is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoEqualTo(String value) {
-            addCriterion("info =", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoNotEqualTo(String value) {
-            addCriterion("info <>", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoGreaterThan(String value) {
-            addCriterion("info >", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoGreaterThanOrEqualTo(String value) {
-            addCriterion("info >=", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoLessThan(String value) {
-            addCriterion("info <", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoLessThanOrEqualTo(String value) {
-            addCriterion("info <=", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoLike(String value) {
-            addCriterion("info like", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoNotLike(String value) {
-            addCriterion("info not like", value, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoIn(List<String> values) {
-            addCriterion("info in", values, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoNotIn(List<String> values) {
-            addCriterion("info not in", values, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoBetween(String value1, String value2) {
-            addCriterion("info between", value1, value2, "info");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoNotBetween(String value1, String value2) {
-            addCriterion("info not between", value1, value2, "info");
-            return (Criteria) this;
-        }
-
         public Criteria andChatGroupIdIsNull() {
             addCriterion("chat_group_id is null");
             return (Criteria) this;
@@ -315,61 +245,36 @@ public class ChatUserRecordExample {
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdEqualTo(String value) {
-=======
-        public Criteria andChatGroupIdEqualTo(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id =", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdNotEqualTo(String value) {
-=======
-        public Criteria andChatGroupIdNotEqualTo(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id <>", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdGreaterThan(String value) {
-=======
-        public Criteria andChatGroupIdGreaterThan(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id >", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdGreaterThanOrEqualTo(String value) {
-=======
-        public Criteria andChatGroupIdGreaterThanOrEqualTo(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id >=", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdLessThan(String value) {
-=======
-        public Criteria andChatGroupIdLessThan(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id <", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdLessThanOrEqualTo(String value) {
-=======
-        public Criteria andChatGroupIdLessThanOrEqualTo(Integer value) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id <=", value, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdLike(String value) {
             addCriterion("chat_group_id like", value, "chatGroupId");
             return (Criteria) this;
@@ -381,37 +286,92 @@ public class ChatUserRecordExample {
         }
 
         public Criteria andChatGroupIdIn(List<String> values) {
-=======
-        public Criteria andChatGroupIdIn(List<Integer> values) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id in", values, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdNotIn(List<String> values) {
-=======
-        public Criteria andChatGroupIdNotIn(List<Integer> values) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id not in", values, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdBetween(String value1, String value2) {
-=======
-        public Criteria andChatGroupIdBetween(Integer value1, Integer value2) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id between", value1, value2, "chatGroupId");
             return (Criteria) this;
         }
 
-<<<<<<< HEAD
         public Criteria andChatGroupIdNotBetween(String value1, String value2) {
-=======
-        public Criteria andChatGroupIdNotBetween(Integer value1, Integer value2) {
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
             addCriterion("chat_group_id not between", value1, value2, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIsNull() {
+            addCriterion("role is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIsNotNull() {
+            addCriterion("role is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEqualTo(String value) {
+            addCriterion("role =", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotEqualTo(String value) {
+            addCriterion("role <>", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThan(String value) {
+            addCriterion("role >", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleGreaterThanOrEqualTo(String value) {
+            addCriterion("role >=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThan(String value) {
+            addCriterion("role <", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLessThanOrEqualTo(String value) {
+            addCriterion("role <=", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleLike(String value) {
+            addCriterion("role like", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotLike(String value) {
+            addCriterion("role not like", value, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIn(List<String> values) {
+            addCriterion("role in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotIn(List<String> values) {
+            addCriterion("role not in", values, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleBetween(String value1, String value2) {
+            addCriterion("role between", value1, value2, "role");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleNotBetween(String value1, String value2) {
+            addCriterion("role not between", value1, value2, "role");
             return (Criteria) this;
         }
 

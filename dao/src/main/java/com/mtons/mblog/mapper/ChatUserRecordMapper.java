@@ -4,9 +4,13 @@ import com.mtons.mblog.pojo.ChatUserRecord;
 import com.mtons.mblog.pojo.ChatUserRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+<<<<<<< HEAD
 import org.springframework.stereotype.Component;
 
 @Component
+=======
+
+>>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
 public interface ChatUserRecordMapper {
     long countByExample(ChatUserRecordExample example);
 

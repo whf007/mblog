@@ -2,22 +2,26 @@ package com.mtons.mblog.pojo;
 
 import java.util.Date;
 
-public class ChatUserRecord {
+public class ChatGroupUser {
+    private Integer chatGroupId;
+
     private Long userId;
 
     private String userName;
 
-    private String info;
-
-<<<<<<< HEAD
-    private String chatGroupId;
-=======
-    private Integer chatGroupId;
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
+    private String role;
 
     private Date createTime;
 
     private Date updateTime;
+
+    public Integer getChatGroupId() {
+        return chatGroupId;
+    }
+
+    public void setChatGroupId(Integer chatGroupId) {
+        this.chatGroupId = chatGroupId;
+    }
 
     public Long getUserId() {
         return userId;
@@ -35,29 +39,12 @@ public class ChatUserRecord {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getInfo() {
-        return info;
+    public String getRole() {
+        return role;
     }
 
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
-    }
-
-<<<<<<< HEAD
-    public String getChatGroupId() {
-        return chatGroupId;
-    }
-
-    public void setChatGroupId(String chatGroupId) {
-        this.chatGroupId = chatGroupId == null ? null : chatGroupId.trim();
-=======
-    public Integer getChatGroupId() {
-        return chatGroupId;
-    }
-
-    public void setChatGroupId(Integer chatGroupId) {
-        this.chatGroupId = chatGroupId;
->>>>>>> 44f218f0ee4c6f097fc3e62cc2d0cc89cd114d1e
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
     }
 
     public Date getCreateTime() {

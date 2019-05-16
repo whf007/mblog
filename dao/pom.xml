@@ -11,7 +11,7 @@
 
     <groupId>com.mtons.mblog</groupId>
     <artifactId>dao</artifactId>
-
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -39,11 +39,29 @@
             <version>4.3.8.RELEASE</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>proficio-repository</id>
+            <name>Proficio Repository</name>
+            <url>file://D:/wanghefei/soft/repository/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>proficio-repository</id>
+            <name>Proficio Repository</name>
+            <url>file://D:/wanghefei/soft/repository/releases/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <classesDirectory>
+                    </classesDirectory>
+                </configuration>
             </plugin>
 
             <!-- MyBatis Generator 插件 -->
