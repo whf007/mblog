@@ -291,13 +291,13 @@
             -->
             <!--<ignoreColumn column="deptId" delimitedColumnName=""/>-->
         </table>
-        <table tableName="chat_user"
+        <table tableName="chat_group"
                enableInsert="true"
                enableUpdateByPrimaryKey="true"
                enableSelectByPrimaryKey="true"
                enableSelectByExample="true">
         </table>
-        <!--<table tableName="chat_group_user">-->
-        <!--</table>-->
+        <table tableName="chat_group_user">
+        </table>
     </context>
 </generatorConfiguration>

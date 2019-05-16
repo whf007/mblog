@@ -9,8 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mtons.mblog</groupId>
-    <artifactId>service</artifactId>
-
-
+    <artifactId>mblog-common</artifactId>
+<dependencies>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+    </dependency>
+</dependencies>
 </project>

@@ -9,8 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mtons.mblog</groupId>
-    <artifactId>common</artifactId>
+    <artifactId>mblog-service</artifactId>
+
+    <dependencies>
+        <!-- 内部引用 start-->
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>mblog-common</artifactId>
+            <version>latest</version>
+        </dependency>
 
 
+    </dependencies>
 </project>

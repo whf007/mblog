@@ -9,11 +9,11 @@
 */
 package com.mtons.mblog.web.controller.site.record;
 
+import com.mtons.mblog.ChatService;
 import com.mtons.mblog.base.lang.MtonsException;
 import com.mtons.mblog.modules.data.AccountProfile;
 import com.mtons.mblog.modules.service.MessageService;
 import com.mtons.mblog.modules.service.UserService;
-import com.mtons.mblog.service.ChartUserService;
 import com.mtons.mblog.web.controller.BaseController;
 import com.mtons.mblog.web.controller.site.Views;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class LiveController extends BaseController {
     @Autowired
     private MessageService messageService;
     @Autowired
-    private ChartUserService chartUserService;
+    private ChatService chatService;
     /**
      * 用户文章
      * @param userId 用户ID
@@ -49,7 +49,6 @@ public class LiveController extends BaseController {
     @GetMapping(value = "/{userId}")
     public String posts(@PathVariable(value = "userId") Long userId,
                         ModelMap model, HttpServletRequest request) {
-        chartUserService.selectAll();
         return method(userId, Views.METHOD_POSTS, model, request);
     }
 
