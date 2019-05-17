@@ -12,6 +12,7 @@ import com.mtons.mblog.pojo.ChatGroup;
 import com.mtons.mblog.pojo.ChatGroupUser;
 import com.mtons.mblog.pojo.ChatUserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.Date;
 /**
  * Created by raden on 2019/5/16.
  */
-
+@Service
 public class ChatServiceImpl implements ChatService{
     @Autowired
     private ChatGroupMapper chatGroupMapper;

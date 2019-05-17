@@ -34,3 +34,7 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.search.default.directory_provider: filesystem
             hibernate.search.default.indexBase: ${site.location}/storage/indexes
+
+mybatis:
+    mapper-locations : classpath:mybatis/mapper/*.xml
+    type-aliases-package : com.mtons.mblog.pojo
