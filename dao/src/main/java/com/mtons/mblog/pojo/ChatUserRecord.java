@@ -9,7 +9,7 @@ public class ChatUserRecord {
 
     private String info;
 
-    private Integer chatGroupId;
+    private Long chatGroupId;
 
     private Date createTime;
 
@@ -39,11 +39,11 @@ public class ChatUserRecord {
         this.info = info == null ? null : info.trim();
     }
 
-    public Integer getChatGroupId() {
+    public Long getChatGroupId() {
         return chatGroupId;
     }
 
-    public void setChatGroupId(Integer chatGroupId) {
+    public void setChatGroupId(Long chatGroupId) {
         this.chatGroupId = chatGroupId;
     }
 

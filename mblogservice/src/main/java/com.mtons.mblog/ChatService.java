@@ -1,5 +1,7 @@
 package com.mtons.mblog;
 
+import com.mtons.mblog.entity.ChatRecord;
+import com.mtons.mblog.entity.GroupRole;
 import com.mtons.mblog.entity.GroupUser;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,11 @@ public interface ChatService {
     /**
      * 给用户赋予聊天组权限
      */
-    public boolean roleGroupUser();
+    public boolean addColeGroupUser(GroupRole groupRole);
 
     /**
      * 添加聊天记录
      * @return
      */
-    public int addChatRecord();
+    public int addChatRecord(ChatRecord chatRecord);
 }

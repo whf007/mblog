@@ -8,7 +8,7 @@
         <version>latest</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.mtons.mblog</groupId>
     <artifactId>mblog-service</artifactId>
 
     <dependencies>

@@ -8,8 +8,6 @@
         <module>websocket</module>
         <module>web</module>
         <module>dao</module>
-        <module>service</module>
-        <module>common</module>
         <module>mblogservice</module>
         <module>mblogcommon</module>
 
@@ -58,15 +56,11 @@
             <version>latest</version>
         </dependency>
         <dependency>
-            <artifactId>service</artifactId>
+            <artifactId>mblog-service</artifactId>
             <groupId>com.mtons.mblog</groupId>
             <version>latest</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.8.RELEASE</version>
-        </dependency>
+
         <!-- springboot热部署工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

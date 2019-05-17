@@ -23,7 +23,7 @@
         <!-- service -->
         <dependency>
             <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>mblog-service</artifactId>
         </dependency>
         <!-- springboot热部署工具 -->
         <dependency>
@@ -238,60 +238,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>mblog-service</artifactId>
-            <version>latest</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mtons.mblog</groupId>
-            <artifactId>mblog-service</artifactId>
-            <version>latest</version>
         </dependency>
     </dependencies>
     <build>

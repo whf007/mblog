@@ -40,5 +40,10 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>mblog-service</artifactId>
+            <version>latest</version>
+        </dependency>
     </dependencies>
 </project>

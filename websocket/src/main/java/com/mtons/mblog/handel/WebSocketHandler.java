@@ -1,7 +1,10 @@
 package com.mtons.mblog.handel;
 
 import com.google.gson.Gson;
+import com.mtons.mblog.ChatService;
 import com.mtons.mblog.config.NettyConfig;
+import com.mtons.mblog.convert.ChatMessageConvert;
+import com.mtons.mblog.entity.ChatRecord;
 import com.mtons.mblog.vo.WsMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -16,6 +19,7 @@ import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author jhz
@@ -29,7 +33,8 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 
     private Gson gson = new Gson();
-
+    @Autowired
+    ChatService chatService;
     // onmsg
     // 有信号进来时
     @Override
@@ -89,6 +94,9 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
             TextWebSocketFrame message = (TextWebSocketFrame) msg;
             // 文本消息
             WsMessage wsMessage = gson.fromJson(message.text(), WsMessage.class);
+            // 保存用户发送信息
+            ChatRecord record = ChatMessageConvert.convert(wsMessage);
+            chatService.addChatRecord(record);
             logger.info("接收到消息：" + wsMessage);
             switch (wsMessage.getT()){
                 case 1: // 进入房间

@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mtons.mblog.mapper.ChatGroupMapper">
   <resultMap id="BaseResultMap" type="com.mtons.mblog.pojo.ChatGroup">
+    <id column="chat_group_id" jdbcType="BIGINT" property="chatGroupId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="chat_group_id" jdbcType="INTEGER" property="chatGroupId" />
+    <result column="chat_group_name" jdbcType="VARCHAR" property="chatGroupName" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, user_name, chat_group_id, CREATE_TIME, UPDATE_TIME
+    chat_group_id, user_id, user_name, chat_group_name, CREATE_TIME, UPDATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.mtons.mblog.pojo.ChatGroupExample" resultMap="BaseResultMap">
     select
@@ -83,29 +84,44 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_group
+    where chat_group_id = #{chatGroupId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from chat_group
+    where chat_group_id = #{chatGroupId,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="com.mtons.mblog.pojo.ChatGroupExample">
     delete from chat_group
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mtons.mblog.pojo.ChatGroup">
-    insert into chat_group (user_id, user_name, chat_group_id, 
-      CREATE_TIME, UPDATE_TIME)
-    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{chatGroupId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.mtons.mblog.pojo.ChatGroup" useGeneratedKeys="true" keyProperty="chatGroupId" >
+    insert into chat_group ( user_id, user_name,
+      chat_group_name, CREATE_TIME, UPDATE_TIME
+      )
+    values ( #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+      #{chatGroupName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mtons.mblog.pojo.ChatGroup">
     insert into chat_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chatGroupId != null">
+        chat_group_id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
       <if test="userName != null">
         user_name,
       </if>
-      <if test="chatGroupId != null">
-        chat_group_id,
+      <if test="chatGroupName != null">
+        chat_group_name,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -115,14 +131,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chatGroupId != null">
+        #{chatGroupId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="chatGroupId != null">
-        #{chatGroupId,jdbcType=INTEGER},
+      <if test="chatGroupName != null">
+        #{chatGroupName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -141,14 +160,17 @@
   <update id="updateByExampleSelective" parameterType="map">
     update chat_group
     <set>
+      <if test="record.chatGroupId != null">
+        chat_group_id = #{record.chatGroupId,jdbcType=BIGINT},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.chatGroupId != null">
-        chat_group_id = #{record.chatGroupId,jdbcType=INTEGER},
+      <if test="record.chatGroupName != null">
+        chat_group_name = #{record.chatGroupName,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
@@ -163,13 +185,44 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update chat_group
-    set user_id = #{record.userId,jdbcType=BIGINT},
+    set chat_group_id = #{record.chatGroupId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      chat_group_id = #{record.chatGroupId,jdbcType=INTEGER},
+      chat_group_name = #{record.chatGroupName,jdbcType=VARCHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mtons.mblog.pojo.ChatGroup">
+    update chat_group
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="chatGroupName != null">
+        chat_group_name = #{chatGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where chat_group_id = #{chatGroupId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mtons.mblog.pojo.ChatGroup">
+    update chat_group
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      chat_group_name = #{chatGroupName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where chat_group_id = #{chatGroupId,jdbcType=BIGINT}
   </update>
 </mapper>

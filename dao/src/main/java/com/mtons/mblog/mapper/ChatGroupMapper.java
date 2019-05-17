@@ -10,13 +10,21 @@ public interface ChatGroupMapper {
 
     int deleteByExample(ChatGroupExample example);
 
+    int deleteByPrimaryKey(Long chatGroupId);
+
     int insert(ChatGroup record);
 
     int insertSelective(ChatGroup record);
 
     List<ChatGroup> selectByExample(ChatGroupExample example);
 
+    ChatGroup selectByPrimaryKey(Long chatGroupId);
+
     int updateByExampleSelective(@Param("record") ChatGroup record, @Param("example") ChatGroupExample example);
 
     int updateByExample(@Param("record") ChatGroup record, @Param("example") ChatGroupExample example);
+
+    int updateByPrimaryKeySelective(ChatGroup record);
+
+    int updateByPrimaryKey(ChatGroup record);
 }

@@ -105,6 +105,66 @@ public class ChatGroupExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andChatGroupIdIsNull() {
+            addCriterion("chat_group_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdIsNotNull() {
+            addCriterion("chat_group_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdEqualTo(Long value) {
+            addCriterion("chat_group_id =", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdNotEqualTo(Long value) {
+            addCriterion("chat_group_id <>", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdGreaterThan(Long value) {
+            addCriterion("chat_group_id >", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("chat_group_id >=", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdLessThan(Long value) {
+            addCriterion("chat_group_id <", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdLessThanOrEqualTo(Long value) {
+            addCriterion("chat_group_id <=", value, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdIn(List<Long> values) {
+            addCriterion("chat_group_id in", values, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdNotIn(List<Long> values) {
+            addCriterion("chat_group_id not in", values, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdBetween(Long value1, Long value2) {
+            addCriterion("chat_group_id between", value1, value2, "chatGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupIdNotBetween(Long value1, Long value2) {
+            addCriterion("chat_group_id not between", value1, value2, "chatGroupId");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -235,63 +295,73 @@ public class ChatGroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdIsNull() {
-            addCriterion("chat_group_id is null");
+        public Criteria andChatGroupNameIsNull() {
+            addCriterion("chat_group_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdIsNotNull() {
-            addCriterion("chat_group_id is not null");
+        public Criteria andChatGroupNameIsNotNull() {
+            addCriterion("chat_group_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdEqualTo(Integer value) {
-            addCriterion("chat_group_id =", value, "chatGroupId");
+        public Criteria andChatGroupNameEqualTo(String value) {
+            addCriterion("chat_group_name =", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdNotEqualTo(Integer value) {
-            addCriterion("chat_group_id <>", value, "chatGroupId");
+        public Criteria andChatGroupNameNotEqualTo(String value) {
+            addCriterion("chat_group_name <>", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdGreaterThan(Integer value) {
-            addCriterion("chat_group_id >", value, "chatGroupId");
+        public Criteria andChatGroupNameGreaterThan(String value) {
+            addCriterion("chat_group_name >", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("chat_group_id >=", value, "chatGroupId");
+        public Criteria andChatGroupNameGreaterThanOrEqualTo(String value) {
+            addCriterion("chat_group_name >=", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdLessThan(Integer value) {
-            addCriterion("chat_group_id <", value, "chatGroupId");
+        public Criteria andChatGroupNameLessThan(String value) {
+            addCriterion("chat_group_name <", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdLessThanOrEqualTo(Integer value) {
-            addCriterion("chat_group_id <=", value, "chatGroupId");
+        public Criteria andChatGroupNameLessThanOrEqualTo(String value) {
+            addCriterion("chat_group_name <=", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdIn(List<Integer> values) {
-            addCriterion("chat_group_id in", values, "chatGroupId");
+        public Criteria andChatGroupNameLike(String value) {
+            addCriterion("chat_group_name like", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdNotIn(List<Integer> values) {
-            addCriterion("chat_group_id not in", values, "chatGroupId");
+        public Criteria andChatGroupNameNotLike(String value) {
+            addCriterion("chat_group_name not like", value, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdBetween(Integer value1, Integer value2) {
-            addCriterion("chat_group_id between", value1, value2, "chatGroupId");
+        public Criteria andChatGroupNameIn(List<String> values) {
+            addCriterion("chat_group_name in", values, "chatGroupName");
             return (Criteria) this;
         }
 
-        public Criteria andChatGroupIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("chat_group_id not between", value1, value2, "chatGroupId");
+        public Criteria andChatGroupNameNotIn(List<String> values) {
+            addCriterion("chat_group_name not in", values, "chatGroupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupNameBetween(String value1, String value2) {
+            addCriterion("chat_group_name between", value1, value2, "chatGroupName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChatGroupNameNotBetween(String value1, String value2) {
+            addCriterion("chat_group_name not between", value1, value2, "chatGroupName");
             return (Criteria) this;
         }
 

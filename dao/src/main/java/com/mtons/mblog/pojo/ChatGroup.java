@@ -3,15 +3,25 @@ package com.mtons.mblog.pojo;
 import java.util.Date;
 
 public class ChatGroup {
+    private Long chatGroupId;
+
     private Long userId;
 
     private String userName;
 
-    private Integer chatGroupId;
+    private String chatGroupName;
 
     private Date createTime;
 
     private Date updateTime;
+
+    public Long getChatGroupId() {
+        return chatGroupId;
+    }
+
+    public void setChatGroupId(Long chatGroupId) {
+        this.chatGroupId = chatGroupId;
+    }
 
     public Long getUserId() {
         return userId;
@@ -29,12 +39,12 @@ public class ChatGroup {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Integer getChatGroupId() {
-        return chatGroupId;
+    public String getChatGroupName() {
+        return chatGroupName;
     }
 
-    public void setChatGroupId(Integer chatGroupId) {
-        this.chatGroupId = chatGroupId;
+    public void setChatGroupName(String chatGroupName) {
+        this.chatGroupName = chatGroupName == null ? null : chatGroupName.trim();
     }
 
     public Date getCreateTime() {

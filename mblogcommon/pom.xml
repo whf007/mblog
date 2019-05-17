@@ -15,5 +15,9 @@
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
     </dependency>
+    <dependency>
+        <groupId>com.mtons.mblog</groupId>
+        <artifactId>dao</artifactId>
+    </dependency>
 </dependencies>
 </project>
