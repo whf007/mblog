@@ -37,12 +37,12 @@ public class ShiroConfiguration {
         return new AccountRealm();
     }
 
-    @Bean
-    public CacheManager shiroCacheManager(net.sf.ehcache.CacheManager cacheManager) {
-        EhCacheManager ehCacheManager = new EhCacheManager();
-        ehCacheManager.setCacheManager(cacheManager);
-        return ehCacheManager;
-    }
+//    @Bean
+//    public CacheManager shiroCacheManager(net.sf.ehcache.CacheManager cacheManager) {
+//        EhCacheManager ehCacheManager = new EhCacheManager();
+//        ehCacheManager.setCacheManager(cacheManager);
+//        return ehCacheManager;
+//    }
 
     /**
      * Shiro的过滤器链

@@ -3,8 +3,10 @@ package com.mtons.mblog.mapper;
 import com.mtons.mblog.pojo.ChatGroup;
 import com.mtons.mblog.pojo.ChatGroupExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ChatGroupMapper {
     long countByExample(ChatGroupExample example);
 

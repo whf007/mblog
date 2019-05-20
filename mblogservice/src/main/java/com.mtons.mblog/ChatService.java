@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by raden on 2019/5/16.
  */
-@Service
+
 public interface ChatService {
     /**
      * 创建聊天组

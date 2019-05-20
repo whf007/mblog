@@ -330,15 +330,15 @@
         <!--开发默认环境-->
         <profile>
             <id>mysql</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <profileActive>mysql</profileActive>
             </properties>
         </profile>
         <profile>
             <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <profileActive>local</profileActive>
             </properties>
