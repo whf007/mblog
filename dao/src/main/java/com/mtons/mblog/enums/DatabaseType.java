@@ -7,5 +7,5 @@ package com.mtons.mblog.enums;
  * 2）DatabaseType中的变量名称就是数据库的名称
  */
 public enum DatabaseType {
-    mytestdb,mytestdb2
+    mblog,chat
 }

@@ -258,7 +258,7 @@
                     <include>templates/**</include>
                 </includes>
             </resource>
-          
+
         </resources>
         <plugins>
             <plugin>

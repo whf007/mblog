@@ -67,8 +67,8 @@ public class MyBatisConfig {
     public DynamicDataSource dataSource(@Qualifier("myTestDbDataSource") DataSource myTestDbDataSource,
                                         @Qualifier("myTestDb2DataSource") DataSource myTestDb2DataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DatabaseType.mytestdb, myTestDbDataSource);
-        targetDataSources.put(DatabaseType.mytestdb2, myTestDb2DataSource);
+        targetDataSources.put(DatabaseType.mblog, myTestDbDataSource);
+        targetDataSources.put(DatabaseType.chat, myTestDb2DataSource);
 
         DynamicDataSource dataSource = new DynamicDataSource();
         dataSource.setTargetDataSources(targetDataSources);// 该方法是AbstractRoutingDataSource的方法

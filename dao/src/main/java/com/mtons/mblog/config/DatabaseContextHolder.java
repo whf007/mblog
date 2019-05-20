@@ -14,7 +14,6 @@ public class DatabaseContextHolder {
     public static void setDatabaseType(DatabaseType type){
         contextHolder.set(type);
     }
-
     public static DatabaseType getDatabaseType(){
         return contextHolder.get();
     }

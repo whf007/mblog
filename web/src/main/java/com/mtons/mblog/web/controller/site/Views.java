@@ -122,4 +122,5 @@ public interface Views {
 
     String REDIRECT_USER_HOME = "redirect:/users/%d";
     String REDIRECT_INDEX = "redirect:/index";
+    String REDIRECT_LOGIN_HOME = "redirect:%s";
 }

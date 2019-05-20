@@ -3,20 +3,27 @@ package com.mtons.mblog.config;
 import com.mtons.mblog.shiro.AccountRealm;
 import com.mtons.mblog.shiro.AccountSubjectFactory;
 import com.mtons.mblog.shiro.AuthenticatedFilter;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.mgt.SubjectFactory;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletRequest;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.apache.shiro.web.util.WebUtils.SAVED_REQUEST_KEY;
 
 /**
  * shiro权限管理的配置
@@ -75,6 +82,7 @@ public class ShiroConfiguration {
         hashMap.put("/storage/**", "anon");
         hashMap.put("/login", "anon");
         hashMap.put("/user/**", "authc");
+        hashMap.put("/live/**", "authc");
         hashMap.put("/settings/**", "authc");
         hashMap.put("/post/editing", "authc");
         hashMap.put("/post/submit", "authc");

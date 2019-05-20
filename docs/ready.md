@@ -10,3 +10,5 @@
 1. Maven3安装
 2. IDE安装lombok插件
 
+账号密码  admin  wanghf!@#$
+

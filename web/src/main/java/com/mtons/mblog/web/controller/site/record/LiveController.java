@@ -11,6 +11,7 @@ package com.mtons.mblog.web.controller.site.record;
 
 import com.mtons.mblog.ChatService;
 import com.mtons.mblog.base.lang.MtonsException;
+import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.modules.data.AccountProfile;
 import com.mtons.mblog.modules.service.MessageService;
 import com.mtons.mblog.modules.service.UserService;
@@ -51,7 +52,17 @@ public class LiveController extends BaseController {
                         ModelMap model, HttpServletRequest request) {
         return method(userId, Views.METHOD_POSTS, model, request);
     }
-
+    @GetMapping(value = "/home")
+    public String home(ModelMap model, HttpServletRequest request) {
+        // 创建聊天室
+        AccountProfile profile = getProfile();
+        GroupUser groupUser = new GroupUser();
+        groupUser.setUserId(profile.getId());
+        groupUser.setUserName(profile.getName());
+        int group = chatService.createGroup(groupUser);
+        model.put("groupId",group);
+        return method(profile.getId(), Views.METHOD_POSTS, model, request);
+    }
     /**
      * 通用方法, 访问 users 目录下的页面
      * @param userId 用户ID
