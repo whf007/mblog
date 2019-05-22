@@ -1,4 +1,4 @@
-package com.mtons.mblog;
+package com.mtons.mblog.service;
 
 import com.mtons.mblog.entity.ChatRecord;
 import com.mtons.mblog.entity.GroupRole;

@@ -1,7 +1,7 @@
 package com.mtons.mblog.handel;
 
 import com.google.gson.Gson;
-import com.mtons.mblog.ChatService;
+import com.mtons.mblog.service.ChatService;
 import com.mtons.mblog.config.NettyConfig;
 import com.mtons.mblog.convert.ChatMessageConvert;
 import com.mtons.mblog.entity.ChatRecord;

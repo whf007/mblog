@@ -1,13 +1,12 @@
-package com.mtons.mblog.impl;
+package com.mtons.mblog.service.impl;
 
-import com.mtons.mblog.ChatService;
+import com.mtons.mblog.service.ChatService;
 import com.mtons.mblog.config.DatabaseContextHolder;
 import com.mtons.mblog.convert.ConvertChat;
 import com.mtons.mblog.entity.ChatRecord;
 import com.mtons.mblog.entity.GroupRole;
 import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.enums.DatabaseType;
-import com.mtons.mblog.inte.TargetDataSource;
 import com.mtons.mblog.mapper.ChatGroupMapper;
 import com.mtons.mblog.mapper.ChatGroupUserMapper;
 import com.mtons.mblog.mapper.ChatUserRecordMapper;
@@ -16,9 +15,6 @@ import com.mtons.mblog.pojo.ChatGroupUser;
 import com.mtons.mblog.pojo.ChatUserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 /**
  * Created by raden on 2019/5/16.

@@ -60,7 +60,12 @@
             <groupId>com.mtons.mblog</groupId>
             <version>latest</version>
         </dependency>
-
+        <!-- common -->
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>mblog-common</artifactId>
+            <version>latest</version>
+        </dependency>
         <!-- springboot热部署工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

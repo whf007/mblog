@@ -25,6 +25,11 @@
             <groupId>com.mtons.mblog</groupId>
             <artifactId>mblog-service</artifactId>
         </dependency>
+        <!-- common -->
+        <dependency>
+            <groupId>com.mtons.mblog</groupId>
+            <artifactId>mblog-common</artifactId>
+        </dependency>
         <!-- springboot热部署工具 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

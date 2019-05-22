@@ -61,6 +61,8 @@ logging:
     level:
         org.springframework: WARN
         org.hibernate: WARN
+    config:
+        classpath: logback.xml
 
 # site.options.theme: [default|classic]
 site:

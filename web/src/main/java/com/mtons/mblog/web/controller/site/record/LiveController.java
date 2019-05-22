@@ -9,7 +9,7 @@
 */
 package com.mtons.mblog.web.controller.site.record;
 
-import com.mtons.mblog.ChatService;
+import com.mtons.mblog.service.ChatService;
 import com.mtons.mblog.base.lang.MtonsException;
 import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.modules.data.AccountProfile;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,15 +54,15 @@ public class LiveController extends BaseController {
         return method(userId, Views.METHOD_POSTS, model, request);
     }
     @GetMapping(value = "/home")
+    @ResponseBody
     public String home(ModelMap model, HttpServletRequest request) {
         // 创建聊天室
         AccountProfile profile = getProfile();
         GroupUser groupUser = new GroupUser();
         groupUser.setUserId(profile.getId());
         groupUser.setUserName(profile.getName());
-        int group = chatService.createGroup(groupUser);
-        model.put("groupId",group);
-        return method(profile.getId(), Views.METHOD_POSTS, model, request);
+       chatService.createGroup(groupUser);
+        return String.valueOf(groupUser.getChatGroupId());
     }
     /**
      * 通用方法, 访问 users 目录下的页面
