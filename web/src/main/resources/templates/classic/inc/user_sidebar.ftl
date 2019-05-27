@@ -21,7 +21,7 @@
             <a class="btn btn-primary btn-block btn-sm" href="${base}/settings/profile">
                 <i class="icon icon-note"></i> 编辑个人资料
             </a>
-            <a class="btn btn-primary btn-block btn-sm" onclick="createGroup()">
+            <a class="btn btn-primary btn-block btn-sm" href="#" onclick="createGroup()">
                 <i class="icon icon-note"></i> 开启直播
             </a>
         </li>

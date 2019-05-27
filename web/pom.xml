@@ -11,7 +11,7 @@
 
     <groupId>com.mtons.mblog</groupId>
     <artifactId>web</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <dependencies>
 
         <!-- websocket -->
@@ -156,11 +156,11 @@
         </dependency>
         <!-- /end -->
         <!--把内置的tomcat给注释掉 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <!-- ehcache -->
         <dependency>
@@ -232,12 +232,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

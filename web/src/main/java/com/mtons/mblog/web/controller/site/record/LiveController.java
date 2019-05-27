@@ -57,7 +57,13 @@ public class LiveController extends BaseController {
     @ResponseBody
     public String home(ModelMap model, HttpServletRequest request) {
         // 创建聊天室
+
         AccountProfile profile = getProfile();
+        // 查询当前用户是否存在直播房间
+        Long groupId = chatService.queryGroup(profile.getId());
+        if(groupId!=null) {
+            return String.valueOf(groupId);
+        }
         GroupUser groupUser = new GroupUser();
         groupUser.setUserId(profile.getId());
         groupUser.setUserName(profile.getName());

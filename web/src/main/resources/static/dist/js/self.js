@@ -4,7 +4,8 @@ function createGroup() {
         url:_MTONS.BASE_PATH+"/live/home",           //URL
         dataType:"json",                 //返回的数据类型
         success:function(data){          //data就是返回的json类型的数据
-            alert(data);
+            var str_json= JSON.stringify(data)
+            alert(str_json);
             if(data.mess == "true"){
                 alert("删除成功");
                 obj.parents("tr").remove();
