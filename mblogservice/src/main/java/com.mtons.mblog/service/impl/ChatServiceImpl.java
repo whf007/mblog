@@ -17,13 +17,14 @@ import com.mtons.mblog.pojo.ChatGroupUser;
 import com.mtons.mblog.pojo.ChatUserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by raden on 2019/5/16.
  */
-@Service
+@Service("ChatService")
 @TargetDataSource(name=DatabaseType.chat)
 public class ChatServiceImpl implements ChatService{
     @Autowired
@@ -33,9 +34,8 @@ public class ChatServiceImpl implements ChatService{
     @Autowired
     private ChatUserRecordMapper chatUserRecordMapper;
     @Override
-//    @Transactional
+    @Transactional
     public int createGroup(GroupUser groupUser) {
-        DatabaseContextHolder.setDatabaseType(DatabaseType.chat);
 
         ChatGroup group = ConvertChat.groupUserTochatGroup(groupUser);
         chatGroupMapper.insert(group);
@@ -45,8 +45,8 @@ public class ChatServiceImpl implements ChatService{
         int insert = chatGroupUserMapper.insert(chatGroupUser);
         return insert;
     }
+    @TargetDataSource(name=DatabaseType.chat)
     public Long queryGroup(Long userId){
-        DatabaseContextHolder.setDatabaseType(DatabaseType.chat);
         // 查询用户是否存在直播组
         ChatGroupExample example = new ChatGroupExample();
         example.createCriteria().andUserIdEqualTo(userId);

@@ -20,12 +20,14 @@ $(function() {
 
     // Prompt for setting a username
     var username ;
+    var userId;
     var connected = false; // 连接状态
     var $currentInput = $usernameInput.focus();
 
     // 设置昵称
     function setUsername () {
         username = _MTONS.LOGIN_NAME;
+        userId = _MTONS.LOGIN_TOKEN;
         if (username) {
             $loginPage.fadeOut();
             $chatPage.show();
@@ -37,6 +39,7 @@ $(function() {
             msg.n = username;
             // 通常情况下，房间标识在服务端处理，想测试可以直接使用 url 中的参数输入或者在页面上参数输入
             msg.room_id = 1;
+            msg.user_id = userId;
             ws.send(JSON.stringify(msg));
         }
     }

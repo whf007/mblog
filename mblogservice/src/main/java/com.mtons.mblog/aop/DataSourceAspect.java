@@ -3,16 +3,20 @@ package com.mtons.mblog.aop;/**
  */
 
 import com.mtons.mblog.config.DatabaseContextHolder;
+import com.mtons.mblog.config.DynamicDataSource;
 import com.mtons.mblog.enums.DatabaseType;
 import com.mtons.mblog.inte.TargetDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-
-import java.util.Enumeration;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 /**
  * @program: mblog
@@ -23,6 +27,7 @@ import java.util.Enumeration;
 @Aspect
 @Order(-10)//保证该AOP在@Transactional之前执行
 @Component
+@Slf4j
 public class DataSourceAspect {
 
 
@@ -31,25 +36,27 @@ public class DataSourceAspect {
 
     }
 
-    @Before("@annotation(ds)")
-    public void changeDataSource(JoinPoint point,TargetDataSource ds) throws Throwable {
-        //获取当前的指定的数据源;
-        DatabaseType dsId =ds.name();
-        //如果不在我们注入的所有的数据源范围之内，那么输出警告信息，系统自动使用默认的数据源。
-        DatabaseContextHolder.setDatabaseType(dsId);
+    @Around("dataSource()")
+    public Object around(ProceedingJoinPoint point) throws Throwable {
+        Class<?> aClass = point.getTarget().getClass();
+        TargetDataSource ds = (TargetDataSource)aClass.getAnnotation(TargetDataSource.class);
+        if (ds != null) {
+            //获取当前的指定的数据源;
+            DatabaseType dsId =ds.name();
+            //如果不在我们注入的所有的数据源范围之内，那么输出警告信息，系统自动使用默认的数据源。
+            DatabaseContextHolder.setDatabaseType(dsId);
+        } else {
+            DatabaseContextHolder.setDatabaseType(DatabaseType.mblog);
+            log.info("set datasource is " + DatabaseType.mblog.name());
+        }
+        try {
+            return point.proceed();
+        } finally {
+            DatabaseContextHolder.clearDataBaseType();
+            log.debug("clean datasource");
+        }
+
 
     }
-
-    @After("@annotation(ds)")
-    public void restoreDataSource(JoinPoint point, TargetDataSource ds) {
-
-        System.out.println("Revert DataSource : {} > {}"+ds.name()+point.getSignature());
-
-        //方法执行完毕之后，销毁当前数据源信息，进行垃圾回收。
-
-        DatabaseContextHolder.ClearDataBaseType();
-
-    }
-
 
 }

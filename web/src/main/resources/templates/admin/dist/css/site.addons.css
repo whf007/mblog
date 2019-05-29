@@ -1,5 +1,7 @@
 
 .side-left {
+    padding: 0 0 0 15px;
+    margin-left: -15px;
 }
 
 .side-right {

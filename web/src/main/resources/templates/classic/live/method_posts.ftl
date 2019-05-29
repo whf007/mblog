@@ -50,6 +50,16 @@
             overflow:auto;
         }
     }
+    .side-left{
+        border:solid 1px #f0f0f0;
+        padding-bottom: 0;
+        margin: 0;
+        background-color: #fff;
+    }
+    #menuTabs,#chatinput{
+        width: 110%;
+        margin-left: -14px;
+    }
 
 </style>
 <@layout user.name + "的文章">
