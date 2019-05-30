@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by raden on 2019/5/16.
  */
-@Service("ChatService")
+@Service("chatService")
 @TargetDataSource(name=DatabaseType.chat)
 public class ChatServiceImpl implements ChatService{
     @Autowired

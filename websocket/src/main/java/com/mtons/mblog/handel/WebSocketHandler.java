@@ -36,8 +36,12 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 
     private Gson gson = new Gson();
+    static ChatService chatService;
+    // 注入的时候，给类的 service 注入
     @Autowired
-    ChatService chatService;
+    public void setChatService(ChatService chatService) {
+        WebSocketHandler.chatService = chatService;
+    }
     // onmsg
     // 有信号进来时
     @Override
