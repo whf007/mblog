@@ -9,6 +9,7 @@ import com.mtons.mblog.enums.GroupRoleEnum;
 import com.mtons.mblog.pojo.ChatGroup;
 import com.mtons.mblog.pojo.ChatGroupUser;
 import com.mtons.mblog.pojo.ChatUserRecord;
+import com.mtons.mblog.pojo.TmpChatGroupUser;
 
 import java.util.Date;
 
@@ -61,5 +62,14 @@ public class ConvertChat {
         record.setUserId(chatRecord.getUserId());
         record.setUserName(chatRecord.getUserName());
         return record;
+    }
+    // 用户进入聊天组
+    public static TmpChatGroupUser convert(GroupUser groupUser) {
+        TmpChatGroupUser tmpChatGroupUser = new TmpChatGroupUser();
+        tmpChatGroupUser.setUserName(groupUser.getUserName());
+        tmpChatGroupUser.setChatGroupId(Long.valueOf(groupUser.getChatGroupId()));
+        tmpChatGroupUser.setUserId(groupUser.getUserId());
+        tmpChatGroupUser.setCreateTime(new Date());
+        return tmpChatGroupUser;
     }
 }

@@ -207,6 +207,11 @@ $(function() {
             case -10001:
                 // 收到其他人进入房间的消息
                 log(msg.n + " 进入了聊天室");
+                var data = {
+                    username: msg.n,
+                    message: msg.body
+                };
+                addUserMessage(data);
                 break;
             case -11000:
                 // 收到其他人离开房间的信息

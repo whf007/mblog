@@ -3,6 +3,7 @@ package com.mtons.mblog.convert;/**
  */
 
 import com.mtons.mblog.entity.ChatRecord;
+import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.vo.WsMessage;
 
 /**
@@ -16,6 +17,13 @@ public class ChatMessageConvert {
         ChatRecord record = new ChatRecord();
         record.setChatGroupId(wsMessage.getRoom_id());
         record.setInfo(wsMessage.getBody());
+        record.setUserId(Long.valueOf(wsMessage.getUser_id()));
+        record.setUserName(wsMessage.getN());
+        return record;
+    }
+    public static GroupUser convertTmpGroupUser(WsMessage wsMessage){
+        GroupUser record = new GroupUser();
+        record.setChatGroupId(wsMessage.getRoom_id());
         record.setUserId(Long.valueOf(wsMessage.getUser_id()));
         record.setUserName(wsMessage.getN());
         return record;

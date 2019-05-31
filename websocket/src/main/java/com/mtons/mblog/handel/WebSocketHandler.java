@@ -1,6 +1,7 @@
 package com.mtons.mblog.handel;
 
 import com.google.gson.Gson;
+import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.service.ChatService;
 import com.mtons.mblog.config.NettyConfig;
 import com.mtons.mblog.convert.ChatMessageConvert;
@@ -23,6 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author jhz
  * @date 18-10-21 下午9:51
@@ -37,7 +43,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
 
     private Gson gson = new Gson();
     static ChatService chatService;
-    // 注入的时候，给类的 service 注入
+    // 注入的时候，给类的 service 注入  因为handler每次有新连接都会创建，所以使用static注入
     @Autowired
     public void setChatService(ChatService chatService) {
         WebSocketHandler.chatService = chatService;
@@ -69,9 +75,23 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
         broadcastWsMsg( ctx, new WsMessage(-11000, NettyConfig.ctxs.get(ctx) ) );
         NettyConfig.group.remove(ctx.channel());
         NettyConfig.ctxs.remove(ctx);
+        GroupUser groupUser = NettyConfig.chxGourpMap.get(ctx);
+        deleteGourps(groupUser);
+        NettyConfig.gourpMap.remove(groupUser.getChatGroupId());
+        // 删除数据库的聊天信息
+        chatService.removeGroupUser(groupUser);
+        NettyConfig.chxGourpMap.remove(ctx);
         ctx.close();
     }
-
+    private void deleteGourps(GroupUser groupUser) {
+        // 聊天组id
+        List<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
+        if(groupUsers == null || groupUsers.size() == 0) {
+            NettyConfig.gourpMap.remove(groupUser.getChatGroupId());
+        } else {
+            groupUsers.remove(groupUser);
+        }
+    }
     // onmsgover
     // Invoked when a read operation on the Channel has completed.
     @Override
@@ -83,8 +103,14 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     // 发生异常时
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        GroupUser groupUser = NettyConfig.chxGourpMap.get(ctx);
+        log.error("websocket异常：{},会员信息:{}",cause,groupUser);
+        // 聊天组id
+        NettyConfig.gourpMap.remove(groupUser.getChatGroupId());
+        // 删除数据库的聊天信息
+        chatService.removeGroupUser(groupUser);
         ctx.close();
+
     }
 
     // 集中处理 ws 中的消息
@@ -101,14 +127,24 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
             TextWebSocketFrame message = (TextWebSocketFrame) msg;
             // 文本消息
             WsMessage wsMessage = gson.fromJson(message.text(), WsMessage.class);
-            // 保存用户发送信息
-            ChatRecord record = ChatMessageConvert.convert(wsMessage);
-            chatService.addChatRecord(record);
+
             logger.info("接收到消息：" + wsMessage);
             switch (wsMessage.getT()){
                 case 1: // 进入房间
                     // 给进入的房间的用户响应一个欢迎消息，向其他用户广播一个有人进来的消息
-                    broadcastWsMsg( ctx, new WsMessage(-10001,wsMessage.getN()) );
+                    if(NettyConfig.chxGourpMap.get(ctx) == null) {
+                        // 查询出当前已存在的所有在线用户
+                        List<GroupUser> roomUser = NettyConfig.gourpMap.get(wsMessage.getRoom_id());
+                        if(roomUser != null) {
+                            for(GroupUser user : roomUser) {
+                                ctx.channel().writeAndFlush( new TextWebSocketFrame(
+                                        gson.toJson(new WsMessage(-1, user.getUserName()))));
+                            }
+                        }
+                        broadcastWsMsg( ctx, new WsMessage(-10001,wsMessage.getN()) );
+                    } else {
+                        broadcastWsMsg( ctx, new WsMessage(-10001,wsMessage.getN()) );
+                    }
                     AttributeKey<String> name = null;
                     if(!AttributeKey.exists(wsMessage.getN())) {
                          name = AttributeKey.newInstance(wsMessage.getN());
@@ -118,13 +154,30 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
 
                     ctx.channel().writeAndFlush( new TextWebSocketFrame(
                             gson.toJson(new WsMessage(-1, wsMessage.getN()))));
+                    // 保存在线人数
+                    GroupUser groupUser = ChatMessageConvert.convertTmpGroupUser(wsMessage);
+                    List<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
+                    if(groupUsers == null || groupUsers.size() ==0 ) {
+                        groupUsers = new ArrayList<>();
+                    }
+                    groupUsers.add(groupUser);
+                    NettyConfig.gourpMap.put(groupUser.getChatGroupId(),groupUsers);
+                    NettyConfig.chxGourpMap.put(ctx,groupUser);
+                    chatService.addGroupUser(groupUser);
                     break;
-
                 case 2: // 发送消息
                     // 广播消息
                     broadcastWsMsg( ctx, new WsMessage(-2, wsMessage.getN(), wsMessage.getBody()) );
+                    // 保存用户发送信息
+                    ChatRecord record = ChatMessageConvert.convert(wsMessage);
+                    chatService.addChatRecord(record);
                     break;
                 case 3: // 离开房间.
+                    // 删除在线人数
+                    GroupUser groupUser1 = ChatMessageConvert.convertTmpGroupUser(wsMessage);
+                    chatService.removeGroupUser(groupUser1);
+                    deleteGourps(groupUser1);
+                    NettyConfig.chxGourpMap.remove(ctx);
                     broadcastWsMsg( ctx, new WsMessage(-11000, wsMessage.getN(), wsMessage.getBody()) );
                     break;
             }

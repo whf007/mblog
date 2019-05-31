@@ -11,5 +11,5 @@ public class GroupUser {
 
     private String userName;
 
-    private Integer chatGroupId;
+    private Long chatGroupId;
 }

@@ -1,7 +1,8 @@
 package com.mtons.mblog.service.impl;
 
 import com.mtons.mblog.inte.TargetDataSource;
-import com.mtons.mblog.pojo.ChatGroupExample;
+import com.mtons.mblog.mapper.TmpChatGroupUserMapper;
+import com.mtons.mblog.pojo.*;
 import com.mtons.mblog.service.ChatService;
 import com.mtons.mblog.config.DatabaseContextHolder;
 import com.mtons.mblog.convert.ConvertChat;
@@ -12,9 +13,6 @@ import com.mtons.mblog.enums.DatabaseType;
 import com.mtons.mblog.mapper.ChatGroupMapper;
 import com.mtons.mblog.mapper.ChatGroupUserMapper;
 import com.mtons.mblog.mapper.ChatUserRecordMapper;
-import com.mtons.mblog.pojo.ChatGroup;
-import com.mtons.mblog.pojo.ChatGroupUser;
-import com.mtons.mblog.pojo.ChatUserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,16 +31,33 @@ public class ChatServiceImpl implements ChatService{
     private ChatGroupUserMapper chatGroupUserMapper;
     @Autowired
     private ChatUserRecordMapper chatUserRecordMapper;
+    @Autowired
+    private TmpChatGroupUserMapper tmpChatGroupUserMapper;
     @Override
     @Transactional
     public int createGroup(GroupUser groupUser) {
-
         ChatGroup group = ConvertChat.groupUserTochatGroup(groupUser);
         chatGroupMapper.insert(group);
         // 赋值权限
         ChatGroupUser chatGroupUser = ConvertChat.groupRole(groupUser);
         chatGroupUser.setChatGroupId(group.getChatGroupId());
         int insert = chatGroupUserMapper.insert(chatGroupUser);
+        return insert;
+    }
+
+    @Override
+    public int addGroupUser(GroupUser groupUser) {
+        TmpChatGroupUser tmpChatUser = ConvertChat.convert(groupUser);
+        int insert = tmpChatGroupUserMapper.insert(tmpChatUser);
+        return insert;
+    }
+    @Override
+    public int removeGroupUser(GroupUser groupUser) {
+        TmpChatGroupUser tmpChatUser = ConvertChat.convert(groupUser);
+        TmpChatGroupUserExample example = new TmpChatGroupUserExample();
+        TmpChatGroupUserExample.Criteria criteria = example.createCriteria();
+        criteria.andChatGroupIdEqualTo(groupUser.getChatGroupId()).andUserIdEqualTo(groupUser.getUserId());
+        int insert = tmpChatGroupUserMapper.deleteByExample(example);
         return insert;
     }
     @TargetDataSource(name=DatabaseType.chat)

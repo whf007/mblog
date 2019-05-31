@@ -33,3 +33,12 @@ CREATE TABLE `chat_user_record` (
   `CREATE_TIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '建立时间',
   `UPDATE_TIME` datetime  DEFAULT NULL COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员聊天记录';
+
+DROP TABLE IF EXISTS `tmp_chat_group_user`;
+CREATE TABLE `tmp_chat_group_user` (
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `user_name` varchar(32) NOT NULL COMMENT '用户名称',
+  `chat_group_id` bigint(20) NOT NULL COMMENT '聊天组id',
+  `CREATE_TIME` datetime NOT NULL  COMMENT '建立时间',
+  `UPDATE_TIME` datetime  DEFAULT NULL COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='在线聊天会员表';

@@ -66,12 +66,6 @@
             <artifactId>mblog-common</artifactId>
             <version>latest</version>
         </dependency>
-        <!-- springboot热部署工具 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
 
         <dependency>
             <groupId>org.flywaydb</groupId>
