@@ -11,6 +11,7 @@ package com.mtons.mblog.modules.service;
 
 import com.mtons.mblog.base.lang.Consts;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public interface UserEventService {
      * 自增发布文章数
      * @param userId
      */
+    @Transactional
     @CacheEvict(value = {Consts.CACHE_USER, Consts.CACHE_POST}, allEntries = true)
     void identityPost(Long userId, boolean plus);
 
@@ -29,6 +31,7 @@ public interface UserEventService {
      * 自增评论数
      * @param userId
      */
+    @Transactional
     @CacheEvict(value = {Consts.CACHE_USER, Consts.CACHE_POST}, allEntries = true)
     void identityComment(Long userId, boolean plus);
 
@@ -37,6 +40,7 @@ public interface UserEventService {
      * @param userIds
      * @param plus
      */
+    @Transactional
     @CacheEvict(value = {Consts.CACHE_USER, Consts.CACHE_POST}, allEntries = true)
     void identityComment(Set<Long> userIds, boolean plus);
 }

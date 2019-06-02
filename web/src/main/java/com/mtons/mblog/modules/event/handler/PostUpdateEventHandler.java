@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author langhsu
@@ -25,6 +26,7 @@ public class PostUpdateEventHandler implements ApplicationListener<PostUpdateEve
 
     @Async
     @Override
+    @Transactional
     public void onApplicationEvent(PostUpdateEvent event) {
         if (event == null) {
             return;

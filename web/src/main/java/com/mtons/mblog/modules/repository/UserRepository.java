@@ -21,6 +21,7 @@ import java.util.Collection;
 /**
  * @author langhsu
  */
+
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     User findByUsername(String username);
 

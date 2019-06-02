@@ -109,6 +109,8 @@ public class TagServiceImpl implements TagService {
             pt.setTagId(po.getId());
             pt.setWeight(System.currentTimeMillis());
             postTagRepository.save(pt);
+            // 更新用户文章数
+
         }
     }
 
