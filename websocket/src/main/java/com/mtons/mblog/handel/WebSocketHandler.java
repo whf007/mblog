@@ -24,10 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jhz
@@ -85,11 +82,13 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
     }
     private void deleteGourps(GroupUser groupUser) {
         // 聊天组id
-        List<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
+        LinkedList<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
         if(groupUsers == null || groupUsers.size() == 0) {
             NettyConfig.gourpMap.remove(groupUser.getChatGroupId());
         } else {
-            groupUsers.remove(groupUser);
+            if(groupUsers.contains(groupUser)) {
+                groupUsers.remove(groupUser);
+            }
         }
     }
     // onmsgover
@@ -138,7 +137,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
                         if(roomUser != null) {
                             for(GroupUser user : roomUser) {
                                 ctx.channel().writeAndFlush( new TextWebSocketFrame(
-                                        gson.toJson(new WsMessage(-1, user.getUserName()))));
+                                        gson.toJson(new WsMessage(-3, user.getUserName()))));
                             }
                         }
                         broadcastWsMsg( ctx, new WsMessage(-10001,wsMessage.getN()) );
@@ -156,9 +155,9 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
                             gson.toJson(new WsMessage(-1, wsMessage.getN()))));
                     // 保存在线人数
                     GroupUser groupUser = ChatMessageConvert.convertTmpGroupUser(wsMessage);
-                    List<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
+                    LinkedList<GroupUser> groupUsers = NettyConfig.gourpMap.get(groupUser.getChatGroupId());
                     if(groupUsers == null || groupUsers.size() ==0 ) {
-                        groupUsers = new ArrayList<>();
+                        groupUsers = new LinkedList<>();
                     }
                     groupUsers.add(groupUser);
                     NettyConfig.gourpMap.put(groupUser.getChatGroupId(),groupUsers);

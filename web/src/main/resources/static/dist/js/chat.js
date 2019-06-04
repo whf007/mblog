@@ -196,6 +196,22 @@ $(function() {
                 };
                 addUserMessage(data);
                 break;
+            case -1:
+                // 收到进入房间的响应 包含房间信息
+                log("欢迎 " + username + " 进入聊天室");
+                var data = {
+                    username: msg.n,
+                    message: msg.body
+                };
+                addUserMessage(data);
+                break;
+            case -3:
+                var data = {
+                    username: msg.n,
+                    message: msg.body
+                };
+                addUserMessage(data);
+                break;
             case -2:
                 // 收到其他人发过来的消息
                 var data = {

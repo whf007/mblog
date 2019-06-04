@@ -11,20 +11,20 @@
 
     @media (min-width: 267px) {
         #my-player{
-            width: 200px;
+            width: 100%;
             height: 300px;
         }
         #tabContent {
             height:213px;
         }
         .messages {
-            height:514px;
+            height:100%;
             overflow:auto;
         }
     }
     @media (min-width: 467px) {
         #my-player {
-            width: 400px;
+            width: 100%;
             height: 300px;
         }
         #tabContent
@@ -39,7 +39,7 @@
 
     @media (min-width: 767px) {
         #my-player {
-            width: 650px;
+            width: 100%;
             height: 500px;
         }
         #tabContent {
@@ -169,9 +169,11 @@
     }
     var fls = flashChecker();
     if (fls.f) {
-        document.write("您安装了flash,当前flash版本为: " + fls.v + ".x");
+//        document.write("您安装了flash,当前flash版本为: " + fls.v + ".x");
     } else {
-        $("#start_flash span").show();
+        $(".vjs-big-play-button").click(function () {
+            $("#start_flash").click();
+        });
         document.write("您没有安装flash");
     }
     ;
