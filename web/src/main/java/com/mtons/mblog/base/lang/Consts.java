@@ -22,12 +22,14 @@ public interface Consts {
 	/**
 	 * 默认头像
 	 */
-	String AVATAR = "/dist/images/ava/default.png";
+	String AVATAR = "https://en.gravatar.com/userimage/154673030/b9a54b5b990a61cc074668b2e2a0b8c0.png";
 	
 	/**
 	 * 分隔符
 	 */
 	String SEPARATOR = ",";
+
+	String SEPARATOR_X = "x";
 
 	String ROLE_ADMIN = "admin";
 
@@ -119,4 +121,9 @@ public interface Consts {
 	String EMAIL_TEMPLATE_CODE = "email_code.ftl";
 
 	String EDITOR_MARKDOWN = "markdown";
+
+	String STORAGE_LIMIT_SIZE = "storage_limit_size";
+	String STORAGE_MAX_WIDTH = "storage_max_width";
+
+	String THUMBNAIL_POST_SIZE = "thumbnail_post_size";
 }

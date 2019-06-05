@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//import com.mtons.mblog.base.storage.StorageFactory;
+import com.mtons.mblog.base.storage.StorageFactory;
 
 /**
  * Controller 基类
@@ -46,8 +46,8 @@ import java.util.Date;
  */
 @Slf4j
 public class BaseController {
-//    @Autowired
-//    protected StorageFactory storageFactory;
+    @Autowired
+    protected StorageFactory storageFactory;
     @Autowired
     protected SiteOptions siteOptions;
 

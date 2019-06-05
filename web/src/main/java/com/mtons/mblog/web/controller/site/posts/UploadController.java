@@ -9,10 +9,20 @@
 */
 package com.mtons.mblog.web.controller.site.posts;
 
+import com.mtons.mblog.base.lang.Consts;
+import com.mtons.mblog.base.utils.FileKit;
 import com.mtons.mblog.web.controller.BaseController;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -37,57 +47,57 @@ public class UploadController extends BaseController {
         errorInfo.put("UNKNOWN", "未知错误");
     }
 
-//    @PostMapping("/upload")
-//    @ResponseBody
-//    public UploadResult upload(@RequestParam(value = "file", required = false) MultipartFile file,
-//                               HttpServletRequest request) throws IOException {
-//        UploadResult result = new UploadResult();
-//        int crop = ServletRequestUtils.getIntParameter(request, "crop", 0);
-//        int size = ServletRequestUtils.getIntParameter(request, "size", 800);
-//
-//        // 检查空
-//        if (null == file || file.isEmpty()) {
-//            return result.error(errorInfo.get("NOFILE"));
-//        }
-//
-//        String fileName = file.getOriginalFilename();
-//
-//        // 检查类型
-//        if (!FileKit.checkFileType(fileName)) {
-//            return result.error(errorInfo.get("TYPE"));
-//        }
-//
-//        // 检查大小
-//        String limitSize = siteOptions.getValue("storage_limit_size");
-//        if (StringUtils.isBlank(limitSize)) {
-//            limitSize = "2";
-//        }
-//        if (file.getSize() > (Long.parseLong(limitSize) * 1024 * 1024)) {
-//            return result.error(errorInfo.get("SIZE"));
-//        }
-//
-//        // 保存图片
-//        try {
-//            String path;
-//            if (crop == 1) {
-//                int width = ServletRequestUtils.getIntParameter(request, "width", 360);
-//                int height = ServletRequestUtils.getIntParameter(request, "height", 200);
-//                path = storageFactory.get().storeScale(file, Consts.thumbnailPath, width, height);
-//            } else {
-//                path = storageFactory.get().storeScale(file, Consts.thumbnailPath, size);
-//            }
-//            result.ok(errorInfo.get("SUCCESS"));
-//            result.setName(fileName);
-//            result.setPath(path);
-//            result.setSize(file.getSize());
-//
-//        } catch (Exception e) {
-//            result.error(errorInfo.get("UNKNOWN"));
-//            e.printStackTrace();
-//        }
-//
-//        return result;
-//    }
+    @PostMapping("/upload")
+    @ResponseBody
+    public UploadResult upload(@RequestParam(value = "file", required = false) MultipartFile file,
+                               HttpServletRequest request) throws IOException {
+        UploadResult result = new UploadResult();
+        int crop = ServletRequestUtils.getIntParameter(request, "crop", 0);
+        int size = ServletRequestUtils.getIntParameter(request, "size", 800);
+
+        // 检查空
+        if (null == file || file.isEmpty()) {
+            return result.error(errorInfo.get("NOFILE"));
+        }
+
+        String fileName = file.getOriginalFilename();
+
+        // 检查类型
+        if (!FileKit.checkFileType(fileName)) {
+            return result.error(errorInfo.get("TYPE"));
+        }
+
+        // 检查大小
+        String limitSize = siteOptions.getValue("storage_limit_size");
+        if (StringUtils.isBlank(limitSize)) {
+            limitSize = "2";
+        }
+        if (file.getSize() > (Long.parseLong(limitSize) * 1024 * 1024)) {
+            return result.error(errorInfo.get("SIZE"));
+        }
+
+        // 保存图片
+        try {
+            String path;
+            if (crop == 1) {
+                int width = ServletRequestUtils.getIntParameter(request, "width", 360);
+                int height = ServletRequestUtils.getIntParameter(request, "height", 200);
+                path = storageFactory.get().storeScale(file, Consts.thumbnailPath, width, height);
+            } else {
+                path = storageFactory.get().storeScale(file, Consts.thumbnailPath, size);
+            }
+            result.ok(errorInfo.get("SUCCESS"));
+            result.setName(fileName);
+            result.setPath(path);
+            result.setSize(file.getSize());
+
+        } catch (Exception e) {
+            result.error(errorInfo.get("UNKNOWN"));
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
     public static class UploadResult {
         public static int OK = 200;
