@@ -28,7 +28,7 @@ import java.net.InetSocketAddress;
 @MapperScan("com.mtons.mblog.mapper")
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class BootApplication extends SpringBootServletInitializer implements CommandLineRunner {
-
+    // https://jx.618g.com/?url=https://www.iqiyi.com/v_19rrf8lxhw.html#  -- 爱奇艺
     @Autowired
     private ServerBootStrap ws;
     public static void main(String[] args) {

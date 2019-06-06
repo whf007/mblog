@@ -65,9 +65,12 @@ logging:
         classpath: logback.xml
 
 # site.options.theme: [default|classic]
+http:                                             #这里是访问项目外文件夹的关键
+    multipart:
+        locations: ${site.location}
 site:
     version: 3.5.0
-    location: ${user.dir}
+    location: /opt/logs/mblog/ #${user.dir}
     controls:
         # 注册开关
         register: true
