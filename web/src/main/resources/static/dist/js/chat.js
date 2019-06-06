@@ -23,11 +23,12 @@ $(function() {
     var userId;
     var connected = false; // 连接状态
     var $currentInput = $usernameInput.focus();
-
+    var groupId = getQueryString("live");
     // 设置昵称
     function setUsername () {
         username = _MTONS.LOGIN_NAME;
         userId = _MTONS.LOGIN_TOKEN;
+
         if (username) {
             $loginPage.fadeOut();
             $chatPage.show();
@@ -38,7 +39,7 @@ $(function() {
             msg.t = 1;
             msg.n = username;
             // 通常情况下，房间标识在服务端处理，想测试可以直接使用 url 中的参数输入或者在页面上参数输入
-            msg.room_id = 1;
+            msg.room_id = groupId;
             msg.user_id = userId;
             ws.send(JSON.stringify(msg));
         }
@@ -57,7 +58,7 @@ $(function() {
             .text(data.username)
             .css('color', getUsernameColor(data.username));
         var $messageBodyDiv = $('<span class="messageBody">')
-            .text(data.message);
+            .text(": "+data.message);
 
         var typingClass = data.typing ? 'typing' : '';
         var $messageDiv = $('<li class="message"/>')
@@ -82,7 +83,15 @@ $(function() {
             .append($usernameDiv);
         addUserElement($messageDiv, options);
     }
+    // 删除会员信息
+    function delUserMessage (username, options) {
+        options = options || {};
+            $('.inusername li').each(function() {
+                var RemoveText = $(this).text().trim();
+                $('li:contains('+ username + ')').remove();
 
+            });
+    }
     // DOM 操作
     function addMessageElement (el, options) {
         var $el = $(el);
@@ -196,15 +205,6 @@ $(function() {
                 };
                 addUserMessage(data);
                 break;
-            case -1:
-                // 收到进入房间的响应 包含房间信息
-                log("欢迎 " + username + " 进入聊天室");
-                var data = {
-                    username: msg.n,
-                    message: msg.body
-                };
-                addUserMessage(data);
-                break;
             case -3:
                 var data = {
                     username: msg.n,
@@ -232,6 +232,7 @@ $(function() {
             case -11000:
                 // 收到其他人离开房间的信息
                 log("用户 " + msg.n + " 离开了聊天室")
+                delUserMessage(msg.n);
                 break;
         }
     }
@@ -252,7 +253,8 @@ $(function() {
             msg.t = 2;
             msg.n = username;
             msg.body = cleanInput($inputMessage.val());
-
+            msg.user_id = userId;
+            msg.room_id = groupId;
             ws.send(JSON.stringify(msg));
             addChatMessage({username:username,message:msg.body});
             $inputMessage.val("");
@@ -264,4 +266,18 @@ $(function() {
     $("#sendMessage").click(function(event){
         sendMessage();
     })
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if(r != null){
+            return unescape(r[2]);
+        }else if(q != null){
+            return unescape(q[2]);
+        }else{
+            return null;
+        }
+    }
 });

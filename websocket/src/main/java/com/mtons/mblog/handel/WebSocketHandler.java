@@ -74,7 +74,6 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
         NettyConfig.ctxs.remove(ctx);
         GroupUser groupUser = NettyConfig.chxGourpMap.get(ctx);
         deleteGourps(groupUser);
-        NettyConfig.gourpMap.remove(groupUser.getChatGroupId());
         // 删除数据库的聊天信息
         chatService.removeGroupUser(groupUser);
         NettyConfig.chxGourpMap.remove(ctx);
