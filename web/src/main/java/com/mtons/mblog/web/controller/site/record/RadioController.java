@@ -52,33 +52,61 @@ public class RadioController extends BaseController {
     @Autowired
     private ChatService chatService;
 
+    @GetMapping(value = "/index")
+    @ResponseBody
+    public String home(ModelMap model, HttpServletRequest request) {
+        // 创建聊天室
+        AccountProfile profile = getProfile();
+        return String.valueOf(profile.getId());
+    }
+
+    /**
+     * 用户文章
+     *
+     * @param userId 用户ID
+     * @param model  ModelMap
+     * @return template name
+     */
+    @GetMapping(value = "/info/{userId}")
+    public String posts(@PathVariable(value = "userId") Long userId,
+                        ModelMap model, HttpServletRequest request) {
+        // 访问消息页, 判断登录
+        // 标记已读
+        AccountProfile profile = getProfile();
+        if (null == profile || profile.getId() != userId) {
+            throw new MtonsException("您没有权限访问该页面");
+        }
+        messageService.readed4Me(profile.getId());
+        initUser(userId, model);
+        return method(userId, Views.METHOD_POSTS, model, request);
+    }
 
     /**
      * 通用方法, 访问 users 目录下的页面
+     *
      * @param userId 用户ID
      * @param method 调用方法
      * @param model  ModelMap
      * @return template name
      */
-//    @GetMapping(value = "/{userId}")
-//    public String method(@PathVariable(value = "userId") Long userId,
-//                         @PathVariable(value = "method") String method,
-//                         ModelMap model, HttpServletRequest request) {
-//        model.put("pageNo", ServletRequestUtils.getIntParameter(request, "pageNo", 1));
-//
-//        // 访问消息页, 判断登录
-//        if (Views.METHOD_MESSAGES.equals(method)) {
-//            // 标记已读
-//            AccountProfile profile = getProfile();
-//            if (null == profile || profile.getId() != userId) {
-//                throw new MtonsException("您没有权限访问该页面");
-//            }
-//            messageService.readed4Me(profile.getId());
-//        }
-//
-//        initUser(userId, model);
-//        return view(String.format(Views.USER_LIVE_TEMPLATE, method));
-//    }
+    public String method(@PathVariable(value = "userId") Long userId,
+                         @PathVariable(value = "method") String method,
+                         ModelMap model, HttpServletRequest request) {
+        model.put("pageNo", ServletRequestUtils.getIntParameter(request, "pageNo", 1));
+
+        // 访问消息页, 判断登录
+        if (Views.METHOD_MESSAGES.equals(method)) {
+            // 标记已读
+            AccountProfile profile = getProfile();
+            if (null == profile || profile.getId() != userId) {
+                throw new MtonsException("您没有权限访问该页面");
+            }
+            messageService.readed4Me(profile.getId());
+        }
+
+        initUser(userId, model);
+        return view(String.format(Views.USER_RADIO_TEMPLATE, method));
+    }
 
     private void initUser(long userId, ModelMap model) {
         model.put("user", userService.get(userId));
@@ -91,8 +119,9 @@ public class RadioController extends BaseController {
         }
         model.put("owner", owner);
     }
+
     @GetMapping("download")
-    public String download(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String download(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String code = request.getParameter("code");
         String message = request.getParameter("message");
         String requestId = request.getParameter("requestId");
@@ -116,13 +145,14 @@ public class RadioController extends BaseController {
         //写文件
 //        int b;
 //        while ((b = in.read()) != -1) {
-            out.write("123123123".getBytes());
+        out.write("123123123".getBytes());
 //        }
 
 //        in.close();
         out.close();
         return "success";
     }
+
     @PostMapping("result")
     @ResponseBody
     public String result(HttpServletRequest request) throws Exception {
@@ -130,27 +160,33 @@ public class RadioController extends BaseController {
         BufferedOutputStream Buff = null;
         FileWriter fw = null;
         try {
-        String code = request.getParameter("code");
-        String message = request.getParameter("message");
-        String requestId = request.getParameter("requestId");
-        String audioTime = request.getParameter("audioTime");
-        log.info(message +"----返回信息");
-        //经过测试：ufferedOutputStream执行耗时:1,1，1 毫秒
-        outSTr = new FileOutputStream(new File("/download/" + requestId + ".txt"));
-        Buff = new BufferedOutputStream(outSTr);
-        long begin0 = System.currentTimeMillis();
-        Buff.write(message.getBytes());
-        Buff.flush();
-        Buff.close();
-        long end0 = System.currentTimeMillis();
-        System.out.println("BufferedOutputStream执行耗时:" + (end0 - begin0) + " 毫秒");
+            String code = request.getParameter("code");
+            String message = request.getParameter("message");
+            String requestId = request.getParameter("requestId");
+            String audioTime = request.getParameter("audioTime");
+            log.info(message + "----返回信息");
+            //经过测试：ufferedOutputStream执行耗时:1,1，1 毫秒
+            outSTr = new FileOutputStream(new File("/download/" + requestId + ".txt"));
+            Buff = new BufferedOutputStream(outSTr);
+            long begin0 = System.currentTimeMillis();
+            Buff.write(message.getBytes());
+            Buff.flush();
+            Buff.close();
+            long end0 = System.currentTimeMillis();
+            System.out.println("BufferedOutputStream执行耗时:" + (end0 - begin0) + " 毫秒");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                fw.close();
-                Buff.close();
-                outSTr.close();
+                if (fw != null) {
+                    fw.close();
+                }
+                if (Buff != null) {
+                    Buff.close();
+                }
+                if (outSTr != null) {
+                    outSTr.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -51,6 +51,10 @@ public interface Views {
      */
     String USER_LIVE_TEMPLATE = "/live/method_%s";
     /**
+     * 语音
+     */
+    String USER_RADIO_TEMPLATE = "/radio/method_%s";
+    /**
      * 用户文章列表
      */
     String METHOD_POSTS = "posts";

@@ -1,12 +1,12 @@
-function createGroup() {
+function createGroup(urlPath,path) {
     $.ajax({
         type:"GET",                      //请求类型
-        url:_MTONS.BASE_PATH+"/live/home",           //URL
+        url:_MTONS.BASE_PATH+urlPath,           //URL
         dataType:"json",                 //返回的数据类型
         success:function(data){          //data就是返回的json类型的数据
             var str_json= JSON.stringify(data)
             str_json = str_json.replace("\"","").replace("\"","");
-            window.location.href =_MTONS.BASE_PATH+"/live/" +str_json ;
+            window.location.href =_MTONS.BASE_PATH+"/"+path+"/" +str_json ;
             // if(data.mess == "true"){
             //     alert("删除成功");
             //     obj.parents("tr").remove();

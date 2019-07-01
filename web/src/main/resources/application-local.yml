@@ -11,7 +11,7 @@ spring:
         enabled: true
     jpa:
         database: mysql
-        show-sql: true
+        show-sql: false
         hibernate:
             ddl-auto: validate #配置自动建表：updata:没有表新建，有表更新操作,控制台显示建表语句 validate校验表
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
