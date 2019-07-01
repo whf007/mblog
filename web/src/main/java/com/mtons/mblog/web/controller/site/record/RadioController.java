@@ -201,11 +201,8 @@ public class RadioController extends BaseController {
 
     @GetMapping("download")
     public String download(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");
-        String message = request.getParameter("message");
-        String requestId = request.getParameter("requestId");
-        String audioTime = request.getParameter("audioTime");
-        log.info(message + "----返回信息");
+        AccountProfile profile = getProfile();
+        radioRecordService
         //获得请求文件名
         String filename = request.getParameter("filename");
         System.out.println(filename);

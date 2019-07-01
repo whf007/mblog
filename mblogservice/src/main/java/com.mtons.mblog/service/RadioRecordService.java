@@ -12,4 +12,5 @@ import com.mtons.mblog.pojo.RadioRecord;
  **/
 public interface RadioRecordService {
     public void add(RadioRecord radioRecord);
+    public void queryByUserId(RadioRecord radioRecord);
 }
