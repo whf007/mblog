@@ -42,3 +42,12 @@ CREATE TABLE `tmp_chat_group_user` (
   `CREATE_TIME` datetime NOT NULL  COMMENT '建立时间',
   `UPDATE_TIME` datetime  DEFAULT NULL COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='在线聊天会员表';
+DROP TABLE IF EXISTS `radio_record`;
+CREATE TABLE `radio_record` (
+  `user_id` bigint(20) NOT NULL COMMENT '创建用户ID',
+  `request_id` varchar(32) NOT NULL COMMENT '请求响应id',
+  `file_name` bigint(20)  NOT NULL AUTO_INCREMENT  COMMENT '文件名称',
+  `CREATE_TIME` datetime DEFAULT NULL  COMMENT '建立时间',
+  `UPDATE_TIME` datetime  DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`request_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='语音导出信息';

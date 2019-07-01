@@ -70,7 +70,7 @@ http:                                             #这里是访问项目外文�
         locations: ${site.location}
 site:
     version: 3.5.0
-    location: /opt/logs/mblog/ #${user.dir}
+    location: d:/opt/logs/mblog/ #${user.dir}
     controls:
         # 注册开关
         register: true

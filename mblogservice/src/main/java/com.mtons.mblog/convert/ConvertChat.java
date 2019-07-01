@@ -6,10 +6,8 @@ import com.mtons.mblog.entity.ChatRecord;
 import com.mtons.mblog.entity.GroupRole;
 import com.mtons.mblog.entity.GroupUser;
 import com.mtons.mblog.enums.GroupRoleEnum;
-import com.mtons.mblog.pojo.ChatGroup;
-import com.mtons.mblog.pojo.ChatGroupUser;
-import com.mtons.mblog.pojo.ChatUserRecord;
-import com.mtons.mblog.pojo.TmpChatGroupUser;
+import com.mtons.mblog.moduls.RadioRecordVO;
+import com.mtons.mblog.pojo.*;
 
 import java.util.Date;
 
@@ -71,5 +69,16 @@ public class ConvertChat {
         tmpChatGroupUser.setUserId(groupUser.getUserId());
         tmpChatGroupUser.setCreateTime(new Date());
         return tmpChatGroupUser;
+    }
+    // 用戶語音文件申請
+    public static RadioRecord convert(RadioRecordVO radioRecordVO) {
+        RadioRecord radioRecord = new RadioRecord();
+        radioRecord.setUserId(radioRecordVO.getUserId());
+        radioRecord.setCreateTime(new Date());
+        radioRecord.setUpdateTime(radioRecordVO.getUpdateTime());
+        radioRecord.setFileName(radioRecordVO.getFileName());
+        radioRecord.setRequestId(radioRecordVO.getRequestId());
+        radioRecord.setStatus(radioRecordVO.getStatus());
+        return radioRecord;
     }
 }

@@ -24,7 +24,7 @@
             <a class="btn btn-primary btn-block btn-sm" href="#" onclick="createGroup('/live/home','live')">
                 <i class="icon icon-note"></i> 开启直播
             </a>
-            <a class="btn btn-primary btn-block btn-sm" href="#" onclick="createGroup('/radio/index','radio/info')">
+            <a class="btn btn-primary btn-block btn-sm" href="/radio/info/${user.id}">
                 <i class="icon icon-note"></i> 上传语音文件
             </a>
         </li>
