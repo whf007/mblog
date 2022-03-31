@@ -31,7 +31,7 @@
         <qiniu.sdk.version>7.2.18</qiniu.sdk.version>
         <flyway.version>5.2.4</flyway.version>
         <commonmark.version>0.12.1</commonmark.version>
-        <springboot.version>2.1.2.RELEASE</springboot.version>
+        <springboot.version>2.5.12</springboot.version>
     </properties>
 
     <parent>
